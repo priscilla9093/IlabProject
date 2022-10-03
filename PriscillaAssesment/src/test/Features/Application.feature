@@ -5,7 +5,6 @@ Feature: ILab Assessment
 
 
     Given I want to apply from ILab side
-    When I click on careers
     And select south Africa link
     And select the the advertised Jobs
     And I type in my personal details "<applicatName>" and "<surname>" "<emailAddress>" "<message>"

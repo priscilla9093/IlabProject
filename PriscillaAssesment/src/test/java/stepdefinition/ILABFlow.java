@@ -69,17 +69,12 @@ public class ILABFlow extends BaseClass {
         logger.info("career link clicked");
     }
 
-    @When("I click on careers")
-    public void iClickOnCareers() {
-    }
 
     @And("select south Africa link")
     public void selectSouthAfricaLink() throws InterruptedException {
-
         ilabPageObjects= new IlabPageObjects(driver);
         Actions act = new Actions(driver);
         act.sendKeys(Keys.PAGE_DOWN).build().perform(); //Page Down
-        System.out.println("Scroll down perfomed");
         Assert.assertTrue("unable to click the careerLink",ilabPageObjects.clickSouthAfrica());
         logger.info("south Africa has been cicked");
     }
