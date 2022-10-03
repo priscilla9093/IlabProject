@@ -97,18 +97,6 @@ public class ILABFlow extends BaseClass {
 
     }
 
-    @And("I should be able to enter {string} {string} {string}")
-    public void iShouldBeAbleToEnter(String name, String email, String cellNumb) throws InterruptedException {
-        ilabPageObjects= new IlabPageObjects(driver);
-        seleniumAction=new SeleniumAction(driver);
-
-        Assert.assertTrue("unable to switch to frame",ilabPageObjects.swichToFrame());
-        seleniumAction.scrollBy("0","1000");
-        Assert.assertTrue("unable to type in the name",ilabPageObjects.CaptureName(name));
-        Assert.assertTrue("unable to type in email address",ilabPageObjects.TypeEmail(email));
-        Assert.assertTrue("unable to type in cell number",ilabPageObjects.TypeEmail(cellNumb));
-    }
-
     @Then("i should be able to submit the application and quite the browser")
     public void iShouldBeAbleToSubmitTheApplicationAndQuiteTheBrowser() throws InterruptedException {
         ilabPageObjects= new IlabPageObjects(driver);
