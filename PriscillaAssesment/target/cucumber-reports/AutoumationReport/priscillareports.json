@@ -3,11 +3,11 @@
     "line": 2,
     "elements": [
       {
-        "start_timestamp": "2022-10-03T11:48:43.114Z",
+        "start_timestamp": "2022-10-03T12:40:49.487Z",
         "before": [
           {
             "result": {
-              "duration": 9298741100,
+              "duration": 10196763700,
               "status": "passed"
             },
             "match": {
@@ -22,7 +22,7 @@
         "after": [
           {
             "result": {
-              "duration": 1251589700,
+              "duration": 1313718900,
               "status": "passed"
             },
             "match": {
@@ -35,7 +35,7 @@
         "steps": [
           {
             "result": {
-              "duration": 2013485000,
+              "duration": 2275573700,
               "status": "passed"
             },
             "line": 7,
@@ -47,7 +47,7 @@
           },
           {
             "result": {
-              "duration": 68600,
+              "duration": 131600,
               "status": "passed"
             },
             "line": 8,
@@ -59,7 +59,7 @@
           },
           {
             "result": {
-              "duration": 2447540800,
+              "duration": 2314521200,
               "status": "passed"
             },
             "line": 9,
@@ -71,7 +71,7 @@
           },
           {
             "result": {
-              "duration": 2192764100,
+              "duration": 3680302800,
               "status": "passed"
             },
             "line": 10,
@@ -84,7 +84,7 @@
           {
             "result": {
               "error_message": "java.lang.AssertionError: unable to type in the name\r\n\tat org.junit.Assert.fail(Assert.java:89)\r\n\tat org.junit.Assert.assertTrue(Assert.java:42)\r\n\tat stepdefinition.ILABFlow.iShouldBeAbleToEnter(ILABFlow.java:109)\r\n\tat ✽.I should be able to enter \"Priscilla\" \"automationAssessment@iLabQuality.com\" \"I am respoding to the advitised position\"(file:src/test/features/Application.feature:12)\r\n",
-              "duration": 90688320700,
+              "duration": 95439836900,
               "status": "failed"
             },
             "line": 12,
@@ -110,7 +110,7 @@
           },
           {
             "result": {
-              "duration": 111500,
+              "duration": 77900,
               "status": "skipped"
             },
             "line": 13,

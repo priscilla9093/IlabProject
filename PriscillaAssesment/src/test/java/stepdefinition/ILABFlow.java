@@ -105,7 +105,7 @@ public class ILABFlow extends BaseClass {
         Assert.assertTrue("unable to switch to frame",ilabPageObjects.swichToFrame());
         System.out.println("Switched");
         seleniumAction.scrollBy("0","1000");
-        Thread.sleep(10);
+        Thread.sleep(5000);
         Assert.assertTrue("unable to type in the name",ilabPageObjects.CaptureName(name));
         Assert.assertTrue("unable to type in email address",ilabPageObjects.TypeEmail(email));
         Assert.assertTrue("unable to type in cell number",ilabPageObjects.TypeEmail(cellNumb));
