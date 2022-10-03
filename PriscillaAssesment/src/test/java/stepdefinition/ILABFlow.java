@@ -103,9 +103,7 @@ public class ILABFlow extends BaseClass {
         seleniumAction=new SeleniumAction(driver);
 
         Assert.assertTrue("unable to switch to frame",ilabPageObjects.swichToFrame());
-        System.out.println("Switched");
         seleniumAction.scrollBy("0","1000");
-        Thread.sleep(5000);
         Assert.assertTrue("unable to type in the name",ilabPageObjects.CaptureName(name));
         Assert.assertTrue("unable to type in email address",ilabPageObjects.TypeEmail(email));
         Assert.assertTrue("unable to type in cell number",ilabPageObjects.TypeEmail(cellNumb));
@@ -115,8 +113,24 @@ public class ILABFlow extends BaseClass {
     public void iShouldBeAbleToSubmitTheApplicationAndQuiteTheBrowser() throws InterruptedException {
         ilabPageObjects= new IlabPageObjects(driver);
         seleniumAction=new SeleniumAction(driver);
+        seleniumAction.scrollBy("0","1400");
+
+       Assert.assertTrue("unable to type in email address",ilabPageObjects.clickAndValidateMsg());
+    }
+
+    @And("I type in my personal details {string} and {string} {string} {string}")
+    public void iTypeInMyPersonalDetailsAnd(String name, String surname, String email, String msg) {
+        ilabPageObjects= new IlabPageObjects(driver);
+        seleniumAction=new SeleniumAction(driver);
+
+        Assert.assertTrue("unable to switch to frame",ilabPageObjects.swichToFrame());
         seleniumAction.scrollBy("0","1000");
-       //Assert.assertTrue("unable to type in email address",ilabPageObjects.clickAndValidateMsg());
+        Assert.assertTrue("unable to type in the name",ilabPageObjects.CaptureName(name));
+
+        Assert.assertTrue("unable to type in the name",ilabPageObjects.CaptureSurname(surname));
+        Assert.assertTrue("unable to type in email address",ilabPageObjects.TypeEmail(email));
+        Assert.assertTrue("unable to type in email address",ilabPageObjects.CaptureMsg(msg));
+        Assert.assertTrue("unable to type in cell number",ilabPageObjects.TypeCellNum());
     }
 }
 

@@ -12,8 +12,8 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class SeleniumAction {
-    public WebDriver driver;
+public class SeleniumAction extends BaseClass{
+    //public WebDriver driver;
     WebDriverWait wait;
 
     public Actions act ;
@@ -40,6 +40,7 @@ public class SeleniumAction {
 
             wait = new WebDriverWait(driver, 30l);
             wait.until(ExpectedConditions.visibilityOf(element));
+            this.driver.switchTo().frame(element);
             return true;
         } catch (Exception Var) {
             logger.error(String.format("element  %s did not become visible with 15s", element.toString()));

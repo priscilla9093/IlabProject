@@ -5,6 +5,7 @@ import static org.junit.Assert.assertTrue;
 
 import base.BaseClass;
 import org.junit.Assert;
+import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -33,7 +34,8 @@ WebDriver driver;
 
 	@FindBy(xpath="(//div[@class='et_pb_module et_pb_text et_pb_text_1  et_pb_text_align_left et_pb_bg_layout_light']/div/ul/li/a)[1]")
 	private WebElement firstjoblink;
-	
+	@FindBy(name="message")
+	private WebElement textAreaMsg;
 	
 	@FindBy(xpath="//a[text()='Apply Online ']")
 	private WebElement aplyBtn;
@@ -49,41 +51,33 @@ WebDriver driver;
 	private List <WebElement> JobApplink;
 	@FindBy(xpath="/a")
 	private WebElement jobslnk;
-	@FindBy(xpath="//input[@id='wpjb_submit']")
+	@FindBy(css="[value='Submit']")
 	private WebElement btn_submit;
 	@FindBy(xpath="//iframe[contains(@id,hs-form-iframe-)][1]")
 	private WebElement iframe;
+	@FindBy(name="lastname")
+	private WebElement txtSurName;
+	@FindBy(xpath = "//label[@class='hs-main-font-element']")
+	private WebElement txtValidation;
 
 	
 	@FindBy(xpath="//ul[@class='wpjb-errors']/parent::div[@class='wpjb-field']/child::div/following-sibling::ul")
 	private WebElement txt_validation;
 
 
-	public static String getCellNumber(){
+	public  String getCellNumber(){
 		int serviceProviderCode = (int)(Math.random() * (99 - 60) + 60);
 		int threeDigitsNumber = (int)(Math.random() * (999 - 100) + 100);
 		int fouDegitsNumber = (int)(Math.random() * (9999 - 1000) + 1000);
 
 		String forMatedNumber = "0"+serviceProviderCode+" "+threeDigitsNumber+" "+fouDegitsNumber ;
-
+		System.out.println(forMatedNumber);
 		return forMatedNumber;
 
 
 	}
 
-public boolean clickFirstPost() {
 
-	//List<WebElement> elements =BaseClass.drivers.findElements(By.xpath("//div[@class='et_pb_module et_pb_text et_pb_text_1  et_pb_text_align_left et_pb_bg_layout_light']/div/ul/li"));
-	for (int i = 1; i <= JobApplink.size(); i++) {
-
-		JobApplink.get(1).click();
-
-		//System.out.println(i);
-		break;
-
-	}
-	return  false;
-}
 
 
 	public boolean clickCareeLink() throws InterruptedException{
@@ -117,11 +111,7 @@ public boolean swichToFrame(){
 		}
 		return  false;
 	}
-	public void ClickApplyOnline() throws InterruptedException{
-		aplyBtn.click();
-		Thread.sleep(2000);
-		
-	}
+
 
 	public boolean CaptureName(String name){
 		if(seleniumAction.WaitFoElementToBeVisible(input_name)){
@@ -130,7 +120,20 @@ public boolean swichToFrame(){
 		}
 		return false;
 	}
-
+	public boolean CaptureSurname(String surName){
+		if(seleniumAction.WaitFoElementToBeVisible(txtSurName)){
+			seleniumAction.typeText(txtSurName,surName);
+			return true;
+		}
+		return false;
+	}
+	public boolean CaptureMsg(String msg){
+		if(seleniumAction.WaitFoElementToBeVisible(textAreaMsg)){
+			seleniumAction.typeText(textAreaMsg,msg);
+			return true;
+		}
+		return false;
+	}
 	public boolean TypeEmail(String email){
 		if(seleniumAction.WaitFoElementToBeVisible(input_email)){
 			seleniumAction.clickElement(input_email);
@@ -141,7 +144,7 @@ public boolean swichToFrame(){
 
 	}
 
-	private boolean TypeCellNum(){
+	public boolean TypeCellNum(){
 		if(seleniumAction.WaitFoElementToBeVisible(input_phone)){
 			seleniumAction.typeText(input_phone,getCellNumber());
 			return true;
@@ -153,11 +156,10 @@ public boolean swichToFrame(){
 
 	public boolean clickAndValidateMsg() throws InterruptedException {
 
-		//btn_submit.click();
 		if(seleniumAction.WaitFoElementToBeVisible(btn_submit)){
 			seleniumAction.clickElement(btn_submit);
-			String actualString = driver.findElement(By.xpath("//ul[@class='wpjb-errors']/parent::div[@class='wpjb-field']/child::div/following-sibling::ul")).getText();
-			assertTrue(actualString.contains("You need to upload at least one file."));
+		    String actualString = txtValidation.getText();
+			assertTrue(actualString.contains("Please complete all required fields."));
 			return true;
 		}
 		return false;

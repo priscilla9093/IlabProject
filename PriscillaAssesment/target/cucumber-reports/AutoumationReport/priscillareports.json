@@ -3,11 +3,11 @@
     "line": 2,
     "elements": [
       {
-        "start_timestamp": "2022-10-03T12:40:49.487Z",
+        "start_timestamp": "2022-10-03T16:05:35.156Z",
         "before": [
           {
             "result": {
-              "duration": 10196763700,
+              "duration": 10078139500,
               "status": "passed"
             },
             "match": {
@@ -15,14 +15,14 @@
             }
           }
         ],
-        "line": 18,
+        "line": 19,
         "name": "Job Application to ILab",
         "description": "",
         "id": "ilab-assessment;job-application-to-ilab;;2",
         "after": [
           {
             "result": {
-              "duration": 1313718900,
+              "duration": 792336500,
               "status": "passed"
             },
             "match": {
@@ -35,7 +35,7 @@
         "steps": [
           {
             "result": {
-              "duration": 2275573700,
+              "duration": 1519436800,
               "status": "passed"
             },
             "line": 7,
@@ -47,7 +47,7 @@
           },
           {
             "result": {
-              "duration": 131600,
+              "duration": 33300,
               "status": "passed"
             },
             "line": 8,
@@ -59,7 +59,7 @@
           },
           {
             "result": {
-              "duration": 2314521200,
+              "duration": 2182058400,
               "status": "passed"
             },
             "line": 9,
@@ -71,7 +71,7 @@
           },
           {
             "result": {
-              "duration": 3680302800,
+              "duration": 2378253700,
               "status": "passed"
             },
             "line": 10,
@@ -83,37 +83,40 @@
           },
           {
             "result": {
-              "error_message": "java.lang.AssertionError: unable to type in the name\r\n\tat org.junit.Assert.fail(Assert.java:89)\r\n\tat org.junit.Assert.assertTrue(Assert.java:42)\r\n\tat stepdefinition.ILABFlow.iShouldBeAbleToEnter(ILABFlow.java:109)\r\n\tat ✽.I should be able to enter \"Priscilla\" \"automationAssessment@iLabQuality.com\" \"I am respoding to the advitised position\"(file:src/test/features/Application.feature:12)\r\n",
-              "duration": 95439836900,
-              "status": "failed"
+              "duration": 29414503800,
+              "status": "passed"
             },
-            "line": 12,
-            "name": "I should be able to enter \"Priscilla\" \"automationAssessment@iLabQuality.com\" \"I am respoding to the advitised position\"",
+            "line": 13,
+            "name": "I type in my personal details \"Priscilla\" and \"Muleya\" \"automationAssessment@iLabQuality.com\" \"I am respoding to the advitised position\"",
             "match": {
               "arguments": [
                 {
                   "val": "\"Priscilla\"",
-                  "offset": 26
+                  "offset": 30
+                },
+                {
+                  "val": "\"Muleya\"",
+                  "offset": 46
                 },
                 {
                   "val": "\"automationAssessment@iLabQuality.com\"",
-                  "offset": 38
+                  "offset": 55
                 },
                 {
                   "val": "\"I am respoding to the advitised position\"",
-                  "offset": 77
+                  "offset": 94
                 }
               ],
-              "location": "ILABFlow.iShouldBeAbleToEnter(String,String,String)"
+              "location": "ILABFlow.iTypeInMyPersonalDetailsAnd(String,String,String,String)"
             },
             "keyword": "And "
           },
           {
             "result": {
-              "duration": 77900,
-              "status": "skipped"
+              "duration": 185415000,
+              "status": "passed"
             },
-            "line": 13,
+            "line": 14,
             "name": "i should be able to submit the application and quite the browser",
             "match": {
               "location": "ILABFlow.iShouldBeAbleToSubmitTheApplicationAndQuiteTheBrowser()"
