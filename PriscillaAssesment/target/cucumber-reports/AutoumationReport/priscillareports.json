@@ -1,0 +1,147 @@
+[
+  {
+    "line": 2,
+    "elements": [
+      {
+        "start_timestamp": "2022-10-03T11:48:43.114Z",
+        "before": [
+          {
+            "result": {
+              "duration": 9298741100,
+              "status": "passed"
+            },
+            "match": {
+              "location": "ILABFlow.initializeScenario(Scenario)"
+            }
+          }
+        ],
+        "line": 18,
+        "name": "Job Application to ILab",
+        "description": "",
+        "id": "ilab-assessment;job-application-to-ilab;;2",
+        "after": [
+          {
+            "result": {
+              "duration": 1251589700,
+              "status": "passed"
+            },
+            "match": {
+              "location": "ILABFlow.tearDown(Scenario)"
+            }
+          }
+        ],
+        "type": "scenario",
+        "keyword": "Scenario Outline",
+        "steps": [
+          {
+            "result": {
+              "duration": 2013485000,
+              "status": "passed"
+            },
+            "line": 7,
+            "name": "I want to apply from ILab side",
+            "match": {
+              "location": "ILABFlow.iWantToApplyFromILabSide()"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 68600,
+              "status": "passed"
+            },
+            "line": 8,
+            "name": "I click on careers",
+            "match": {
+              "location": "ILABFlow.iClickOnCareers()"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 2447540800,
+              "status": "passed"
+            },
+            "line": 9,
+            "name": "select south Africa link",
+            "match": {
+              "location": "ILABFlow.selectSouthAfricaLink()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 2192764100,
+              "status": "passed"
+            },
+            "line": 10,
+            "name": "select the the advertised Jobs",
+            "match": {
+              "location": "ILABFlow.selectTheTheAdvertisedJobs()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "error_message": "java.lang.AssertionError: unable to type in the name\r\n\tat org.junit.Assert.fail(Assert.java:89)\r\n\tat org.junit.Assert.assertTrue(Assert.java:42)\r\n\tat stepdefinition.ILABFlow.iShouldBeAbleToEnter(ILABFlow.java:109)\r\n\tat ✽.I should be able to enter \"Priscilla\" \"automationAssessment@iLabQuality.com\" \"I am respoding to the advitised position\"(file:src/test/features/Application.feature:12)\r\n",
+              "duration": 90688320700,
+              "status": "failed"
+            },
+            "line": 12,
+            "name": "I should be able to enter \"Priscilla\" \"automationAssessment@iLabQuality.com\" \"I am respoding to the advitised position\"",
+            "match": {
+              "arguments": [
+                {
+                  "val": "\"Priscilla\"",
+                  "offset": 26
+                },
+                {
+                  "val": "\"automationAssessment@iLabQuality.com\"",
+                  "offset": 38
+                },
+                {
+                  "val": "\"I am respoding to the advitised position\"",
+                  "offset": 77
+                }
+              ],
+              "location": "ILABFlow.iShouldBeAbleToEnter(String,String,String)"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 111500,
+              "status": "skipped"
+            },
+            "line": 13,
+            "name": "i should be able to submit the application and quite the browser",
+            "match": {
+              "location": "ILABFlow.iShouldBeAbleToSubmitTheApplicationAndQuiteTheBrowser()"
+            },
+            "keyword": "Then "
+          }
+        ],
+        "tags": [
+          {
+            "name": "@testing"
+          }
+        ]
+      }
+    ],
+    "name": "ILab Assessment",
+    "description": "",
+    "id": "ilab-assessment",
+    "keyword": "Feature",
+    "uri": "file:src/test/features/Application.feature",
+    "tags": [
+      {
+        "name": "@testing",
+        "type": "Tag",
+        "location": {
+          "line": 1,
+          "column": 1
+        }
+      }
+    ]
+  }
+]

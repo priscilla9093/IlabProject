@@ -1,126 +1,172 @@
-package com.ilabnautomation.PageObject;
+package pageObject;
 
-import static org.testng.Assert.assertTrue;
+import static org.junit.Assert.assertTrue;
 
+
+import base.BaseClass;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class IlabPageObjects {
+import java.util.List;
+import java.util.concurrent.TimeUnit;
+
+public class IlabPageObjects extends BaseClass {
 WebDriver driver;
 	
 	public IlabPageObjects(WebDriver driver)
 	{
-	this.driver=driver;
-	PageFactory.initElements(driver, this);
+	super(driver);
+
 	}
 		
-	@FindBy(xpath="//div[@class='col-sm-2 curved-shape']/following-sibling::div/descendant::a[text()='CAREERS']")
-	public WebElement  careerLnk;
+	@FindBy(linkText="Career Opportunities")
+	private WebElement  careerLnk;
 	
-	@FindBy(xpath="//div[@class='vc_btn3-container vc_btn3-left']/child::a[text()='South Africa']")
-	public WebElement SouthAfricaLnk;
+	@FindBy(linkText="South Africa")
+	private WebElement SouthAfricaLnk;
 
-	@FindBy(xpath="//div[contains(@class,'wpjb-job-list wpjb-grid')]//div[1]//div[2]//span[1]//a[1]")
-	public WebElement firstjoblink;
+	@FindBy(xpath="(//div[@class='et_pb_module et_pb_text et_pb_text_1  et_pb_text_align_left et_pb_bg_layout_light']/div/ul/li/a)[1]")
+	private WebElement firstjoblink;
 	
 	
 	@FindBy(xpath="//a[text()='Apply Online ']")
-	public WebElement aplyBtn;
-	@FindBy(xpath="//input[@id='applicant_name']")
-	public WebElement input_name;
-	@FindBy(xpath="//input[@id='email']")
-	public WebElement input_email;
-	@FindBy(xpath="//input[@id='phone']")
-	public WebElement input_phone;
+	private WebElement aplyBtn;
+	@FindBy(xpath="//input[@name='firstname']")
+	private WebElement input_name;
+	@FindBy(name="email")
+	private WebElement input_email;
+	@FindBy(name="phone")
+	private WebElement input_phone;
 	@FindBy(xpath="//textarea[@id='message']")
-	public WebElement input_msg;
-	
+	private WebElement input_msg;
+	@FindBy(xpath="//div[@class='et_pb_module et_pb_text et_pb_text_1  et_pb_text_align_left et_pb_bg_layout_light']/div/ul/li")
+	private List <WebElement> JobApplink;
+	@FindBy(xpath="/a")
+	private WebElement jobslnk;
 	@FindBy(xpath="//input[@id='wpjb_submit']")
-	public WebElement btn_submit;
+	private WebElement btn_submit;
+	@FindBy(xpath="//iframe[contains(@id,hs-form-iframe-)][1]")
+	private WebElement iframe;
+
 	
 	@FindBy(xpath="//ul[@class='wpjb-errors']/parent::div[@class='wpjb-field']/child::div/following-sibling::ul")
-	public WebElement txt_validation;
-	
-	public void clickCareeLink() throws InterruptedException{
-		careerLnk.click();
-		Thread.sleep(2000);
-		
+	private WebElement txt_validation;
+
+
+	public static String getCellNumber(){
+		int serviceProviderCode = (int)(Math.random() * (99 - 60) + 60);
+		int threeDigitsNumber = (int)(Math.random() * (999 - 100) + 100);
+		int fouDegitsNumber = (int)(Math.random() * (9999 - 1000) + 1000);
+
+		String forMatedNumber = "0"+serviceProviderCode+" "+threeDigitsNumber+" "+fouDegitsNumber ;
+
+		return forMatedNumber;
+
 
 	}
 
-	public void clickSouthAfrica() throws InterruptedException{
-		SouthAfricaLnk.click();
-		Thread.sleep(2000);
-	}
-		
-	
-	
-	public void clickFirstJob() throws InterruptedException{
-		firstjoblink.click();
-		Thread.sleep(2000);
+public boolean clickFirstPost() {
 
-	
+	//List<WebElement> elements =BaseClass.drivers.findElements(By.xpath("//div[@class='et_pb_module et_pb_text et_pb_text_1  et_pb_text_align_left et_pb_bg_layout_light']/div/ul/li"));
+	for (int i = 1; i <= JobApplink.size(); i++) {
+
+		JobApplink.get(1).click();
+
+		//System.out.println(i);
+		break;
+
+	}
+	return  false;
+}
+
+
+	public boolean clickCareeLink() throws InterruptedException{
+		if(seleniumAction.WaitFoElementToBeVisible(careerLnk)){
+			seleniumAction.clickElement(careerLnk);
+		return true;
+		}
+		return  false;
+			}
+
+	public boolean clickSouthAfrica() throws InterruptedException{
+		if(seleniumAction.WaitFoElementToBeVisible(SouthAfricaLnk)){
+			seleniumAction.clickElement(SouthAfricaLnk);
+			return true;
+		}
+		return  false;
+	}
+
+
+
+public boolean swichToFrame(){
+		seleniumAction.SwitchToIframe(iframe);
+		return  true;
+}
+
+
+	public boolean clickFirstJob() throws InterruptedException{
+		if(seleniumAction.WaitFoElementToBeVisible(firstjoblink)){
+			seleniumAction.clickElement(firstjoblink);
+			return true;
+		}
+		return  false;
 	}
 	public void ClickApplyOnline() throws InterruptedException{
 		aplyBtn.click();
 		Thread.sleep(2000);
 		
 	}
-	
-	public void ApplicantDetails(String name,String email,String msg) throws InterruptedException{
-	input_name.sendKeys(name);
-	Thread.sleep(2000);
-	input_email.sendKeys(email);
-	Thread.sleep(2000);
-	input_phone.sendKeys(getCellNumber());
-	Thread.sleep(2000);
-	input_msg.sendKeys(msg);
-		
-		
-	}
 
-
-	public void clickAndValidateMsg() throws InterruptedException{
-				
-		btn_submit.click();
-		Thread.sleep(3000);
-		String actualString = driver.findElement(By.xpath("//ul[@class='wpjb-errors']/parent::div[@class='wpjb-field']/child::div/following-sibling::ul")).getText();
-		assertTrue(actualString.contains("You need to upload at least one file."));
-		
-		
-		
-//		
-//		String CorrectString = "//ul[@class='wpjb-errors']/parent::div[@class='wpjb-field']/child::div/following-sibling::ul";
-//		CorrectString.get
-//		Assert.assertEquals("You need to upload at least one file.", CorrectString);
-//		
-//		System.out.println(CorrectString);
-//
-//		
-//		 WebElement element =driver.findElement(By.xpath("//ul[@class='wpjb-errors']/parent::div[@class='wpjb-field']/child::div/following-sibling::ul"));
-//	    if (element.getText().equals("You need to upload at least one file."))
-//	     System.out.println(element);
-//	    else 
-//	     System.out.println("Match Not found");
-	}
-	
-	
-	    
-	    public static String getCellNumber(){
-		    int serviceProviderCode = (int)(Math.random() * (99 - 60) + 60);
-		    int threeDigitsNumber = (int)(Math.random() * (999 - 100) + 100);
-		    int fouDegitsNumber = (int)(Math.random() * (9999 - 1000) + 1000);
-
-		    String forMatedNumber = "0"+serviceProviderCode+" "+threeDigitsNumber+" "+fouDegitsNumber ;
-
-		    return forMatedNumber;
-
-				
+	public boolean CaptureName(String name){
+		if(seleniumAction.WaitFoElementToBeVisible(input_name)){
+		seleniumAction.typeText(input_name,name);
+		return true;
 		}
+		return false;
+	}
+
+	public boolean TypeEmail(String email){
+		if(seleniumAction.WaitFoElementToBeVisible(input_email)){
+			seleniumAction.clickElement(input_email);
+			seleniumAction.typeText(input_email,email);
+			return true;
+		}
+		return false;
+
+	}
+
+	private boolean TypeCellNum(){
+		if(seleniumAction.WaitFoElementToBeVisible(input_phone)){
+			seleniumAction.typeText(input_phone,getCellNumber());
+			return true;
+		}
+		return false;
+
+	}
+
+
+	public boolean clickAndValidateMsg() throws InterruptedException {
+
+		//btn_submit.click();
+		if(seleniumAction.WaitFoElementToBeVisible(btn_submit)){
+			seleniumAction.clickElement(btn_submit);
+			String actualString = driver.findElement(By.xpath("//ul[@class='wpjb-errors']/parent::div[@class='wpjb-field']/child::div/following-sibling::ul")).getText();
+			assertTrue(actualString.contains("You need to upload at least one file."));
+			return true;
+		}
+		return false;
+
+
+
+	}
+	    
+
 		
 	    
 }
