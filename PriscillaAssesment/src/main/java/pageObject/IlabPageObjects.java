@@ -1,34 +1,46 @@
 package pageObject;
 
-import static org.junit.Assert.assertTrue;
-
-
 import base.BaseClass;
+//import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+
 public class IlabPageObjects extends BaseClass {
-WebDriver driver;
-	
+//   WebDriver driver;
+
+	public static HashMap<String, String> storeValue = new HashMap<>();
+
 	public IlabPageObjects(WebDriver driver)
 	{
-	super(driver);
+		super(driver);
 
 	}
-		
+//	private static final Logger Logger = Logger.getLogger(IlabPageObjects.class);
+
+	private final org.apache.log4j.Logger logger = org.apache.log4j.Logger.getLogger(IlabPageObjects.class);
+	//	private static final org.apache.logging.log4j.Logger logger = LogManager.getLogger(IlabPageObjects.class);
 	@FindBy(linkText="Career Opportunities")
 	private WebElement  careerLnk;
-	
+
+	private By getclickCareeLinkTxt = By.xpath("(//a[text()='Career Opportunities'])[1]");
+
+	private By getValidateMsg = By.xpath("(//label[text()='Please complete all required fields.'])[1]");
+
 	@FindBy(linkText="South Africa")
 	private WebElement SouthAfricaLnk;
 
@@ -36,7 +48,7 @@ WebDriver driver;
 	private WebElement firstjoblink;
 	@FindBy(name="message")
 	private WebElement textAreaMsg;
-	
+
 	@FindBy(xpath="//a[text()='Apply Online ']")
 	private WebElement aplyBtn;
 	@FindBy(xpath="//input[@name='firstname']")
@@ -60,7 +72,7 @@ WebDriver driver;
 	@FindBy(xpath = "//label[@class='hs-main-font-element']")
 	private WebElement txtValidation;
 
-	
+
 	@FindBy(xpath="//ul[@class='wpjb-errors']/parent::div[@class='wpjb-field']/child::div/following-sibling::ul")
 	private WebElement txt_validation;
 
@@ -81,10 +93,22 @@ WebDriver driver;
 	public boolean clickCareeLink() throws InterruptedException{
 		if(seleniumAction.WaitFoElementToBeVisible(careerLnk)){
 			seleniumAction.clickElement(careerLnk);
-		return true;
+//			seleniumAdaptor.JavaScriptClick(careerLnk);
+			return true;
 		}
 		return  false;
-			}
+	}
+
+
+	public String getclickCareeLinkTxt1(){
+//				seleniumAction.WaitFoElementToBeVisible(getclickCareeLinkTxt);
+		driver.manage().timeouts().implicitlyWait(10L, TimeUnit.SECONDS);
+//		seleniumAdaptor.pauseFor(1);
+		String amt = driver.findElement(this.getclickCareeLinkTxt).getText();
+//				logger.info("The name is :" + amt);
+		System.out.println("The name is :" + amt);
+		return amt;
+	}
 
 	public boolean clickSouthAfrica() throws InterruptedException{
 		if(seleniumAction.WaitFoElementToBeVisible(SouthAfricaLnk)){
@@ -96,10 +120,10 @@ WebDriver driver;
 
 
 
-public boolean swichToFrame(){
+	public boolean swichToFrame(){
 		seleniumAction.SwitchToIframe(iframe);
 		return  true;
-}
+	}
 
 
 	public boolean clickFirstJob() throws InterruptedException{
@@ -113,8 +137,8 @@ public boolean swichToFrame(){
 
 	public boolean CaptureName(String name){
 		if(seleniumAction.WaitFoElementToBeVisible(input_name)){
-		seleniumAction.typeText(input_name,name);
-		return true;
+			seleniumAction.typeText(input_name,name);
+			return true;
 		}
 		return false;
 	}
@@ -156,19 +180,38 @@ public boolean swichToFrame(){
 
 		if(seleniumAction.WaitFoElementToBeVisible(btn_submit)){
 			seleniumAction.clickElement(btn_submit);
-		    String actualString = txtValidation.getText();
-			assertTrue(actualString.contains("Please complete all required fields."));
+			String actualString = txtValidation.getText();
+			validate("Please complete all required fields.",actualString);
 			return true;
 		}
 		return false;
 
-
-
 	}
-	    
 
-		
-	    
+	public String getValidateMsg(){
+
+		driver.manage().timeouts().implicitlyWait(10L, TimeUnit.SECONDS);
+//		seleniumAdaptor.pauseFor(1);
+		String msg = driver.findElement(this.getValidateMsg).getText();
+//				logger.info("The message is :" + msg);
+		System.out.println("The message is :" + msg);
+		return msg;
+	}
+
+	public void putValue(String vname, String vvalue) {
+		storeValue.put(vname, vvalue);
+	}
+
+
+	public String getValue(String vname) {
+		return storeValue.get(vname);
+	}
+
+	public void validate(String expectedResult, String actualResult) {
+		Assert.assertEquals(expectedResult, actualResult);
+	}
+
+
 }
 
 

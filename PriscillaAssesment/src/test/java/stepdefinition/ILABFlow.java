@@ -2,9 +2,10 @@ package stepdefinition;
 
 import Utility.PropertiesFileReader;
 import base.BaseClass;
-import io.cucumber.core.api.Scenario;
+//import io.cucumber.core.api.Scenario;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
+import io.cucumber.java.Scenario;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -15,7 +16,6 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.interactions.Actions;
 import pageObject.IlabPageObjects;
-import pageObject.SearchPageObject;
 import seleniumaction.SeleniumAction;
 
 import java.util.Properties;
@@ -24,11 +24,11 @@ import java.util.concurrent.TimeUnit;
 public class ILABFlow extends BaseClass {
 
     PropertiesFileReader obj=new PropertiesFileReader();
-    SearchPageObject searchPageObject;
-    SeleniumAction seleniumAction;
+
+    //SeleniumAction seleniumAction;
     public IlabPageObjects ilabPageObjects;
     private Scenario scenario;
-
+    private SeleniumAction seleniumAction=new SeleniumAction(driver);
     private final Logger logger = Logger.getLogger(ILABFlow.class);
 
     public ILABFlow() {
@@ -50,7 +50,7 @@ public class ILABFlow extends BaseClass {
     @After
     public void tearDown(Scenario scenario) {
         if(scenario.isFailed()) {
-            takeScreenShot(scenario);
+            takeScreenShotNew(scenario);
         }
 
         try {
@@ -65,8 +65,12 @@ public class ILABFlow extends BaseClass {
     @Given("I want to apply from ILab side")
     public void iWantToApplyFromILabSide() throws InterruptedException {
         ilabPageObjects= new IlabPageObjects(driver);
-       Assert.assertTrue("unable to click the careerLink",ilabPageObjects.clickCareeLink());
+        seleniumAction.scrollBy("0","1400");
+        seleniumAction.pause(5);
+        takeScreenShotNew(this.scenario);
+        Assert.assertTrue("unable to click the careerLink",ilabPageObjects.clickCareeLink());
         logger.info("career link clicked");
+
     }
 
 
@@ -75,16 +79,24 @@ public class ILABFlow extends BaseClass {
         ilabPageObjects= new IlabPageObjects(driver);
         Actions act = new Actions(driver);
         act.sendKeys(Keys.PAGE_DOWN).build().perform(); //Page Down
+
+        takeScreenShotNew(scenario);
         Assert.assertTrue("unable to click the careerLink",ilabPageObjects.clickSouthAfrica());
-        logger.info("south Africa has been cicked");
-    }
+
+        logger.info("south Africa has been clicked");
+
+        }
 
     @And("select the the advertised Jobs")
     public void selectTheTheAdvertisedJobs() throws InterruptedException {
         ilabPageObjects= new IlabPageObjects(driver);
+        seleniumAction.pause(5);
+        takeScreenShotNew(scenario);
         Assert.assertTrue("unable to click on the job application",ilabPageObjects.clickFirstJob());
         //ilabPageObjects.clickFirstPost();
         logger.info("first job has been clicked");
+
+
     }
 
     @And("click on the apply online link")
@@ -97,8 +109,9 @@ public class ILABFlow extends BaseClass {
         ilabPageObjects= new IlabPageObjects(driver);
         seleniumAction=new SeleniumAction(driver);
         seleniumAction.scrollBy("0","1400");
-
-       Assert.assertTrue("unable to type in email address",ilabPageObjects.clickAndValidateMsg());
+        Assert.assertTrue("unable to type in email address",ilabPageObjects.clickAndValidateMsg());
+        seleniumAction.pause(5);
+        takeScreenShotNew(scenario);
     }
 
     @And("I type in my personal details {string} and {string} {string} {string}")
@@ -114,6 +127,8 @@ public class ILABFlow extends BaseClass {
         Assert.assertTrue("unable to type in email address",ilabPageObjects.TypeEmail(email));
         Assert.assertTrue("unable to type in email address",ilabPageObjects.CaptureMsg(msg));
         Assert.assertTrue("unable to type in cell number",ilabPageObjects.TypeCellNum());
+        seleniumAction.pause(4);
+        takeScreenShotNew(scenario);
     }
 }
 
